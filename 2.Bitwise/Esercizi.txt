@@ -1,0 +1,317 @@
+Tutti i programmi seguenti vanno scritti usando solo istruzioni di
+assegnamento e di ingresso/uscita (niente if, for, while,
+ecc.). Non si devono utilizzare operatori di confronto (<, <=,
+>, >=, !=, ==). Infine non si devono utilizzare operatori logici (!,
+&&, ||).
+
+Inoltre per semplicit‡, in tutti gli esercizi si assume che i valori
+immessi dall'utente non portino mai ad effettuare traslazioni di un
+numero di posizioni maggiore o uguale del numero di bit su cui sono
+rappresentati i vettori di bit.
+
+Indicazioni generali:
+-> con la notazione 2^i si intende "2 elevato alla i".
+-> ricordare che le cifre nella codifica binaria (come in qualsiasi
+   altra codifica), si contano a partire da quella meno significativa (quella
+   piu' a destra). In particolare tale cifra ha ordine zero, quella 
+   immediatamente piu' a sinistra e' di ordine 1, e cosi' via.
+
+-----------------
+
+ES. 1
+
+Traccia: Scrivere un programma che legga da tastiera un numero naturale n,
+moltiplichi il numero per 2 senza utilizzare l'operatore di moltiplicazione
+e stampi il risultato sullo schermo.
+Trascurare eventuali problemi di overflow.
+
+Un possibile output e' il seguente:
+
+Immettere il numero n: 3
+n * 2 = 6
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
+
+----------------
+
+ES. 2
+
+Traccia: Scrivere un programma che legga da tastiera un numero naturale n e,
+	 se n e' dispari, stampi 1, altrimenti stampi 0. 
+
+Un possibile output su schermo e' il seguente:
+
+Immettere il numero n: 7
+Risultato: 1
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
+
+---------------
+
+ES. 3
+
+Traccia: Scrivere un programma che legge da tastiera due numeri
+naturali n ed i, moltiplica il numero n per 2^i senza utilizzare
+l'operatore moltiplicazione, e stampa il risultato sullo schermo.
+Trascurare problemi di overflow.
+
+Un possibile output su schermo e' il seguente:
+
+Immettere il numero n: 3
+Immettere il numero i: 4
+3 * (2^4) = 48
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
+
+---------------
+
+ES. 4
+
+Traccia: Scrivere un programma che legga da tastiera due numeri
+naturali n ed i, effettui la divisione intera del numero n per 2^i
+senza utilizzare l'operatore divisione, e stampi il risultato sullo
+schermo.
+
+Un possibile output su schermo e' il seguente:
+
+Immettere il numero n: 12
+Immettere il numero i: 2
+12 / (2^2) = 3
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
+
+---------------
+
+ES. 5
+
+Traccia: Scrivere un programma che legga da tastiera due numeri naturali i e j. 
+Il programma stampi il valore di un numero naturale 
+z che ha la seguente rappresentazione binaria: 
+le j cifre meno significative di z (ossia quelle a partire dalla
+cifra piu' a destra) coincidono con le j cifre piu' significative 
+(ossia quelle a partire dalla cifra piu' a sinistra) della rappresentazione 
+binaria di i, mentre le restanti cifre sono a zero.
+
+Esempio. Supponiamo che i abbia la seguente rappresentazione binaria: 
+01011001 01001011 01001000 00100010  (supponendo che i numeri naturali
+siano rappresentati su 32 bit).
+Se j=4, allora il numero calcolato z avra' la seguente rappresentazione
+binaria: 00000000 00000000 00000000 00000101.
+
+Un possibile output su schermo e' il seguente:
+
+Immettere il numero i: 6
+Immettere il numero j: 31
+Risultato: 3
+
+-> ATTENZIONE al fatto che, se si immette j=0 o j > 31,
+l'implementazione di questo tipo di programma potrebbe portare ad
+effettuare una traslazione di un numero di posizioni maggiore di quelle 
+contenute nella rappresentazione di un numero naturale. Come
+gia' detto, assumiamo che non siano mai immessi valori che portano a
+tale risultato (quindi, in questo caso, supponiamo 0<j<32).
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
+
+
+---------------
+
+ES. 6
+
+Traccia: Scrivere un programma che legga da tastiera due numeri naturali i e j,
+e stampi il valore di un numero naturale che ha la seguente rappresentazione 
+binaria: 
+le j cifre piu' significative di tale numero (ossia quelle a partire dalla
+cifra piu' a sinistra) coincidono con le j cifre meno significative 
+(ossia quelle a partire dalla cifra piu' a destra) della rappresentazione 
+binaria di i, mentre le restanti cifre sono a zero.
+
+Esempio. Supponiamo che n abbia la seguente rappresentazione binaria:
+00000000 00000000 00000000 01011001 (supponendo che i numeri naturali
+siano rappresentati su 32 bit).
+Se j=4, allora il numero calcolato avra' la seguente rappresentazione
+binaria: 10010000 00000000 00000000 00000000.
+
+Un possibile output su schermo e' il seguente:
+
+Immettere il numero i: 5
+Immettere il numero j: 7
+Risultato: 167772160
+
+-> Per j=0 o j > 31, vale il commento fatto per l'esercizio precedente.
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
+
+
+---------------
+
+-> Sfruttando le soluzioni utilizzate nei due programmi precedenti, si possono
+realizzare questo programma e quello ancora successivo.
+
+ES. 7
+
+Traccia: Scrivere un programma che legge da tastiera due numeri naturali k e j,
+e ruota a destra di j posizioni la rappresentazione binaria del numero k.
+-> La rotazione a destra di j posizioni di una configurazione di bit, si 
+comporta come la traslazione (shift) a destra di j posizioni, eccetto il fatto
+che, i j bit meno significativi di tale configurazione divengono i j bit piu' 
+significativi della nuova configurazione (mentre, nel caso della traslazione 
+i j bit meno significativi sarebbero stati buttati via).
+
+-> Attenzione al fatto che, se si immette j > 31, l'implementazione di
+questo tipo di programma potrebbe cadere nel problema della
+traslazione di un numero di posizioni maggiore di quelle 
+contenute nella rappresentazione di un numero naturale. 
+Come gia' detto, supponiamo che
+non siano mai immessi valori che portano a tale effetto.  Notare che,
+in questo esercizio, dobbiamo scrivere il programma in maniera tale
+che funzioni bene nel caso j=0.
+
+Un possibile output su schermo e' il seguente:
+
+Rotazione a destra:
+Immettere il numero k: 1
+Immettere il numero j: 1
+Risultato: 2147483648 (2^31)
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
+
+---------------
+
+ES. 8
+
+Traccia: Scrivere un programma che legga da tastiera due numeri naturali k e j,
+e ruoti a sinistra di j posizioni la rappresentazione binaria del numero k.
+-> La rotazione a sinistra di j posizioni di una configurazione di bit si 
+comporta come la traslazione (shift) a sinistra di j posizioni, 
+eccetto il fatto che, i j bit piu' significativi di tale configurazione 
+divengono i j bit meno significativi della nuova configurazione (mentre, nel 
+caso della traslazione i j bit piu' significativi sarebbero stati buttati via).
+
+-> Attenzione sempre al caso j > 31 e notare che anche in questo
+esercizio, dobbiamo scrivere il programma in maniera tale che funzioni
+bene nel caso j=0.
+
+Un possibile output su schermo e' il seguente:
+
+Rotazione a sinistra:
+Immettere il numero k: 2147483648 (2^31)
+Immettere il numero j: 1
+Risultato: 1
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
+
+---------------
+ES. 9
+
+Traccia: Scrivere un programma che legga da tastiera un numero
+naturale n, calcoli il piu' piccolo numero naturale dispari i, tale
+che i>=n, e stampi il risultato sullo schermo.  (ovviamente, se n e'
+dispari i sara' uguale ad n, mentre, se n e' pari, i sara' uguale a
+n+1) 
+
+Suggerimento: lavorare sulla configurazione di bit che rappresenta n.
+
+Un possibile output su schermo e' il seguente:
+
+Immettere il numero n: 4
+Risultato: 5
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
+
+---------------
+
+ES. 10 
+
+Traccia: Scrivere un programma che legga da tastiera un numero
+naturale n, calcoli il piu' grande numero naturale pari i, tale che
+i<=n, e stampi il risultato sullo schermo  (ovviamente, se n e' pari
+i sara' uguale ad n, mentre, se n e' dispari, i sara' uguale a n-1).
+Suggerimento: lavorare sulla configurazione di bit che rappresenta n.
+
+Un possibile output su schermo e' il seguente:
+
+Immettere il numero n: 7867
+Risultato: 7866
+
+Soluzione:
+
+#include <iostream>
+using namespace std ;
+
+int main()
+{
+	...
+}
