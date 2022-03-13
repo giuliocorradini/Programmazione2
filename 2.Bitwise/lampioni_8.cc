@@ -19,7 +19,7 @@ T Termina
 
 VERSIONE A 8 LAMPIONI
 
-(c) Giulio Corradini - 2021
+(c) Giulio Corradini - 2022
 */
 
 #include <iostream>
@@ -55,7 +55,7 @@ void aggiorna_stato(unsigned int &stato_lampioni, unsigned int lampione, enum st
 }
 
 bool risparmio_energetico(unsigned int &stato_lampioni) {
-    return (stato_lampioni & 0x77) == 0x77;
+    return (stato_lampioni & 0x55) == 0x55;
 }
 
 int main() {
