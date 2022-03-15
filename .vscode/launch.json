@@ -5,17 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "g++ - Compila ed esegui il debug del file attivo",
-            "type": "cppdbg",
+            "name": "clang++ - Build and debug active file",
+            "type": "lldb",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": true,
-            "MIMode": "lldb",
-            "preLaunchTask": "C/C++: g++ compila il file attivo",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "C/C++: g++ compila il file attivo"
         }
     ]
 }
