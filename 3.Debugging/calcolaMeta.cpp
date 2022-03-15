@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-int calcolaMeta(double valore) {
+double calcolaMeta(double valore) {
 	return valore / 2;
 }
 

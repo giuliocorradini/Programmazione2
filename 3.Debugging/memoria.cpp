@@ -13,7 +13,7 @@ using namespace std;
 /* Non si puo cambiare il tipo di ritorno di miafunzione
  * Occorre visualizzare il valore 5 nella stampa finale
  */
-void miafunzione(int var) {
+void miafunzione(int &var) {
 	var = 5;
 }
 

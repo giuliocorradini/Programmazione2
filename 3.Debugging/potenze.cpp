@@ -10,10 +10,14 @@
 using namespace std;
 
 double pow(double numero, int esponente) { // @suppress("No return")
+	double moltiplicatore;
+
 	while (esponente > 0) {
-		numero = numero * numero;
+		moltiplicatore = numero * numero;
 		esponente--;
 	}
+
+	return moltiplicatore;
 }
 
 int main() {
@@ -21,7 +25,7 @@ int main() {
 	cout << "Inserisci il numero di partenza: ";
 	cin >> numeroDiPartenza;
 
-	while (numeroDiPartenza != 1) {
+	while (numeroDiPartenza >= 1) {
 		double potenza = pow(numeroDiPartenza,3);
 		cout << numeroDiPartenza << " : " << potenza << endl;
 		numeroDiPartenza--;
