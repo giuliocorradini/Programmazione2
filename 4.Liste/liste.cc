@@ -234,17 +234,17 @@ lista list_intersection(lista a, lista b) {
     return intersectionList;
 }
 
-// exclusive disjunction
+// Differenza insiemistica: gli elementi di a non in comunec con b
 lista list_difference(lista a, lista b) {
     lista differenceList = nullptr;
-    elem *exclusiveElement;
+    elem *exclusive_a_element;
 
     while(a) {
 
-        if(!search(b, head(a)) && !search(differenceList, head(b))) {
-            exclusiveElement = new elem;
-            exclusiveElement->inf = head(a);
-            differenceList = insert_elem(differenceList, exclusiveElement);
+        if(!search(b, head(a)) && !search(differenceList, head(a))) {
+            exclusive_a_element = new elem;
+            exclusive_a_element->inf = head(a);
+            differenceList = insert_elem(differenceList, exclusive_a_element);
         }
 
         a = tail(a);
