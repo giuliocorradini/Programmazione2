@@ -84,7 +84,7 @@ elem *search(lista l, int v) {
 int count(lista l, int v) {
     int c = 0;
 
-    while(l=search(l,v)) {
+    while((l=search(l,v))) {
         c++;
         l = tail(l);
     }
@@ -179,6 +179,80 @@ lista insert_tail_elem(lista l, elem *e) {
     return l;
 }
 
+/*
+    Date due liste che implementano insieme di valori interi, implementare le funzioni
+    insiemistiche union, intersect e difference che implementano unione insiemistica,
+    intersezione insiemistica e differenza insiemistica, rispettivamente.
+
+    Ogni funzione deve restituire una nuova lista quale risultato dell’operazione.
+    Le funzioni devono far uso delle primitive dei tipi lista per scorrere le due
+    liste e per creare la nuova lista.
+*/
+
+lista list_union(lista a, lista b) {
+    lista unionList = nullptr;
+    elem *newUniqueElement;
+
+    while(a) {
+        if(!search(unionList, head(a))) {
+            newUniqueElement = new elem;
+            newUniqueElement->inf = head(a);
+            unionList = insert_elem(unionList, newUniqueElement);
+        }
+
+        a = tail(a);
+    }
+    
+    while(b) {
+        if(!search(unionList, head(b))) {
+            newUniqueElement = new elem;
+            newUniqueElement->inf = head(b);
+            unionList = insert_elem(unionList, newUniqueElement);
+        }
+
+        b = tail(b);
+    }
+
+    return unionList;
+}
+
+lista list_intersection(lista a, lista b) {
+    lista intersectionList = nullptr;
+    elem *commonElement;
+
+    while(a) {
+
+        if(search(b, head(a)) && !search(intersectionList, head(a))) {
+            commonElement = new elem;
+            commonElement->inf = head(a);
+            intersectionList = insert_elem(intersectionList, commonElement);
+        }
+
+        a = tail(a);
+    }
+
+    return intersectionList;
+}
+
+// exclusive disjunction
+lista list_difference(lista a, lista b) {
+    lista differenceList = nullptr;
+    elem *exclusiveElement;
+
+    while(a) {
+
+        if(!search(b, head(a)) && !search(differenceList, head(b))) {
+            exclusiveElement = new elem;
+            exclusiveElement->inf = head(a);
+            differenceList = insert_elem(differenceList, exclusiveElement);
+        }
+
+        a = tail(a);
+    }
+
+    return differenceList;
+}
+
 //#define INTERACTIVE
 
 int main() {
@@ -233,6 +307,7 @@ int main() {
     cout << "Cancello la lista" << endl;
     delete_list(l);
 #else
+/*
     cout << "Inserisci 5 elementi nella lista:" << endl;
     l = create_list(5, cin);
     print_list(l);
@@ -256,6 +331,30 @@ int main() {
     cin >> e->inf;
     insert_tail_elem(l, e);
     print_list(l);
+    */
+
+    lista a, b;
+    cout << "Inserisci gli elementi di a (3)";
+    a = create_list(3, cin);
+
+    cout << "Inserisci gli elementi di b (5)";
+    b = create_list(5, cin);
+
+    cout << "a: ";
+    print_list(a);
+    
+    cout << "b: ";
+    print_list(b);
+
+    cout << "unione: ";
+    print_list(list_union(a, b));
+
+    cout << "intersezione: ";
+    print_list(list_intersection(a, b));
+
+    cout << "differenza: ";
+    print_list(list_difference(a, b));
+    
 
 #endif
 
