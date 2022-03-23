@@ -192,9 +192,10 @@ int main() {
                     cout << "Usa i tasti F e B navigare avanti (F) e indietro (B) nella history" << endl;
                     
                     do {
-                        if(!currentCrawling)
+                        if(!currentCrawling) {
                             cout << "Fine della lista" << endl;
-                        else
+                            break;
+                        } else
                             cout << head(currentCrawling);
                         cin >> crawlAction;
 
@@ -204,6 +205,8 @@ int main() {
                             break;
                             case 'B':
                                 currentCrawling = crawl(currentCrawling, BACKWARD);
+                            break;
+                            case 'S':
                             break;
                             default:
                                 cout << "Azione non valida" << endl;
