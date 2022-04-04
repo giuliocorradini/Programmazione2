@@ -5,11 +5,11 @@
 #include <cstring>
 using namespace std;
 
-char * head(list l) {
+tipo_inf head(list l) {
     return l->info;
 }
 
-element_t *new_element(char *content) {
+element_t *new_element(tipo_inf content) {
     element_t *elem = new element_t;
     copy(elem->info, content);
 
@@ -17,7 +17,7 @@ element_t *new_element(char *content) {
 }
 
 
-element_t *search(list l, char *v) {
+element_t *search(list l, tipo_inf v) {
     while(l != nullptr) {
         if(compare(head(l), v) == 0)
             return l;

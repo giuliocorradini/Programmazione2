@@ -26,7 +26,7 @@ list list_create(int n, istream &in) {
     return l;
 }
 
-list delete_value(list l, char *v) {
+list delete_value(list l, tipo_inf v) {
     element_t *currentPointer = l;
 
     while(currentPointer) {

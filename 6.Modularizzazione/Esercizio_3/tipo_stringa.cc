@@ -1,19 +1,14 @@
 #include "tipo.h"
+#include <cstring>
 #include <iostream>
 using namespace std;
 
 int compare(tipo_inf a, tipo_inf b) {
-    if(a==b)
-        return 0;
-    
-    if(a > b)
-        return 1;
-
-    return -1;
+    return strcmp(a, b);
 }
 
 void copy(tipo_inf &dst, tipo_inf src) {
-    dst = src;
+    strcpy(dst, src);
 }
 
 void print(tipo_inf x) {

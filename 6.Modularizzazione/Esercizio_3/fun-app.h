@@ -7,7 +7,7 @@ using namespace std;
 
 void list_print(list);
 list list_create(int, istream &);
-list delete_value(list, char *);
+list delete_value(list, tipo_inf);
 void list_destroy(list);
 enum direction_t {
     FORWARD, BACKWARD

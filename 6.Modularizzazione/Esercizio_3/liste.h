@@ -10,9 +10,9 @@ struct element_t {
 
 typedef struct element_t * list;
 
-char * head(list);
-element_t *new_element(char *);
-element_t *search(list, char *);
+tipo_inf head(list);
+element_t *new_element(tipo_inf);
+element_t *search(list, tipo_inf);
 
 
 list tail(list);

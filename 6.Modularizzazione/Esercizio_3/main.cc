@@ -18,8 +18,8 @@ int main() {
     element_t *currentCrawling;
     char userMenuSelection;
     int urlNumber;
-    char urlToDelete[51];
-    char *urlToSearch = urlToDelete;
+    tipo_inf urlToDelete;
+    tipo_inf *urlToSearch = &urlToDelete;
     char crawlAction;
 
     do {
@@ -50,9 +50,9 @@ int main() {
 
             case 'S':
                 cout << "Inserisci l'URL da cercare: ";
-                cin >> urlToSearch;
+                cin >> *urlToSearch;
 
-                currentCrawling = search(history, urlToSearch);
+                currentCrawling = search(history, *urlToSearch);
 
                 if(!currentCrawling)
                     cout << "Elemento non trovato" << endl;
