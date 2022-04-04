@@ -1,30 +1,7 @@
 #include <iostream>
 using namespace std;
 
-
-// includi liste-tipo.cc
-const int STRING_DIMENSION = 51;
-struct element_t {
-    char info[STRING_DIMENSION];
-    struct element_t *prev;
-    struct element_t *next;
-};
-typedef struct element_t * list;
-char * head(list);
-element_t *new_element(char *);
-element_t *search(list, char *);
-
-
-// includi fun-app.cc
-void list_print(list);
-list list_create(int, istream &);
-list delete_value(list, char *);
-void list_destroy(list);
-enum direction_t {
-    FORWARD, BACKWARD
-};
-element_t *crawl(element_t *, direction_t);
-
+#include "fun-app.h"
 
 inline void print_menu() {
     cout << "Gestione della history del browser"                            << endl

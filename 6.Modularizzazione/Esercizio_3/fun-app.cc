@@ -1,29 +1,12 @@
 #include <iostream>
 using namespace std;
 
-// includi liste-tipo.cc
-const int STRING_DIMENSION = 51;
-struct element_t {
-    char info[STRING_DIMENSION];
-    struct element_t *prev;
-    struct element_t *next;
-};
-typedef struct element_t * list;
-char * head(list);
-element_t *new_element(char *);
-element_t *search(list, char *);
-
-
-// includi liste.cc
-list tail(list);
-list prev(list);
-list insert_element(list, element_t *);
-list delete_element(list, element_t *);
-
+#include "fun-app.h"
 
 void list_print(list l) {
     while(l) {
-        cout << head(l) << endl;
+        print(head(l));
+        cout << endl;
 
         l = tail(l);
     }
@@ -48,7 +31,7 @@ list delete_value(list l, char *v) {
 
     while(currentPointer) {
 
-        if(strcmp(head(currentPointer), v) == 0) {
+        if(compare(head(currentPointer), v) == 0) {
             l = delete_element(l, currentPointer);
         }
         
@@ -67,11 +50,6 @@ void list_destroy(list l) {
         delete lastElement;
     }
 }
-
-enum direction_t {
-    FORWARD,
-    BACKWARD
-};
 
 element_t * crawl(element_t *e, direction_t d) {
     if(d == FORWARD)
