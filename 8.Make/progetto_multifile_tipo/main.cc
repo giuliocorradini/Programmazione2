@@ -8,6 +8,8 @@
   Se la lista è ordinata la ricerca deve richiamare ord_search() altrimenti search().
 */
 
+//versione1
+
 #include <iostream>
 #include <cstring>
 
