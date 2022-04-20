@@ -1,14 +1,19 @@
 OBJ = main.o albero.o stringa.o
-CXXFLAGS = -Wall -DDEBUG
+EXEC = Alberi
+CXXFLAGS = -Wall
 
 
-Alberi: $(OBJ)
-	$(CXX) -o Alberi $(OBJ)
+$(EXEC): $(OBJ)
+	$(CXX) -o $(EXEC) $(OBJ)
 
 -include dependencies
 
+debug: set_debug_flags $(EXEC)
 
-.PHONY: clean clean_all gen_deps
+.PHONY: clean clean_all gen_deps set_debug_flags
+set_debug_flags: clean
+	CXXFLAGS = $(CXXFLAGS) -DDEBUG	#not working
+
 clean:
 	rm -f *.o
 
