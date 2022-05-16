@@ -38,16 +38,9 @@ graph g_build(ifstream &g, bool oriented, bool weighted) {
     return gr;
 }
 
-bool connected(graph &g, int vertex) {
-    int nodes = g.dim;
-    bool *visited = new bool[nodes];
-
-    for(int i=0; i<nodes; i++) {
-        visited[i] = false;
-    }
-
+int * connected(graph &g, int *visited, int vertex, int id) {
     codaBFS c = newQueue();
-    visited[vertex-1] = true;
+    visited[vertex-1] = id;
     enqueue(c, vertex);
 
     int u;
@@ -58,7 +51,7 @@ bool connected(graph &g, int vertex) {
         while(u_adjPtr != nullptr) {
             int thisNode = get_adjnode(u_adjPtr);
             if(!visited[thisNode - 1]) {
-                visited[thisNode - 1] = true;
+                visited[thisNode - 1] = id;
                 enqueue(c, thisNode);
             }
 
@@ -66,11 +59,48 @@ bool connected(graph &g, int vertex) {
         }
     }
 
-    for(int i=0; i<nodes; i++) 
-        if(visited[i] == false)
-            return false;
+    return visited;
+}
 
-    return true;
+bool isConnected(graph &g, int vertex) {
+    int *visited = new int[g.dim];
+    for(int i=0; i<g.dim; i++)
+        visited[i] = 0;
+
+    connected(g, visited, vertex, 1);
+
+    bool conn = true;
+
+    for(int i=0; i<g.dim; i++) 
+        if(visited[i] == 0)
+            conn = false;
+
+    delete[] visited;
+    return conn;
+}
+
+void connected_component(graph &g) {
+    int globalNodes = g.dim;
+    int *components = new int[globalNodes];
+    for(int i=0; i<globalNodes; i++) {
+        components[i] = 0;
+    }
+
+    int componentCounter = 1;
+
+    for(int i=0; i<globalNodes; i++) {
+        if(components[i] == 0)
+            connected(g, components, i+1, componentCounter++);
+    }
+
+    for(int j=1; j<componentCounter; j++) {
+        cout << "componente connessa #" << j << ": ";
+        for(int i=0; i<globalNodes; i++) {
+            if(components[i] == j)
+                cout << i + 1 << " ";
+        }
+        cout << endl;
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -111,7 +141,9 @@ int main(int argc, char *argv[]) {
         cout << endl;
     }
 
-    cout << "Is connected? " << connected(g, 1) << endl;
+    cout << "Is totally connected? " << (isConnected(g, 1) ? "yes" : "no") << endl;
+
+    connected_component(g);
 
     return 0;
 }
