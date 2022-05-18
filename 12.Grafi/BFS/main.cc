@@ -103,6 +103,42 @@ void connected_component(graph &g) {
     }
 }
 
+bool spanning_tree(graph &g, int vertex, int *father, int *visited) {
+    int n = g.dim;
+    for(int i=0; i<n; i++) {
+        father[i] = -1;
+        visited[i] = 0;
+    }
+
+    visited[vertex-1] = 1;
+
+    codaBFS c = newQueue();
+
+    enqueue(c, vertex);
+    while(!isEmpty(c)) {
+        int u = dequeue(c);
+        adj_list wPtr = get_adjlist(g, u);
+        while(wPtr) {
+            int w = get_adjnode(wPtr);
+            if(!visited[w-1]) {
+                visited[w-1] = 1;
+                father[w-1] = u-1;
+                enqueue(c, w);
+            }
+
+            wPtr = get_nextadj(wPtr);
+        }
+    }
+
+    int orphans = 0;
+    for(int i=0; i<g.dim; i++) {
+        if(father[i] == -1)
+            orphans++;
+    }
+
+    return orphans <= 1;
+}
+
 int main(int argc, char *argv[]) {
     if(argc != 4) {
         cout << "usage: " << argv[0] << " filename <1 if oriented> <1 if weighted>" << endl;
@@ -144,6 +180,24 @@ int main(int argc, char *argv[]) {
     cout << "Is totally connected? " << (isConnected(g, 1) ? "yes" : "no") << endl;
 
     connected_component(g);
+
+    cout << "Computing spanning tree. Enter start vertex: ";
+    int v;
+    cin >> v;
+    int *visited = new int[g.dim];
+    int *father = new int[g.dim];
+
+    for(int i=0; i<g.dim; i++) {
+        visited[i] = 0;
+        father[i] = -1;
+    }
+
+    bool isSt = spanning_tree(g, v, father, visited);
+    cout << "This is " << (isSt ? "" : "not") << " a spanning tree" << endl;
+    if(isSt) {
+        for(int i=0; i<g.dim; i++)
+            cout << father[i] + 1 << endl;
+    }
 
     return 0;
 }
