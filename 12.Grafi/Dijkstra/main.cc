@@ -64,9 +64,9 @@ void dijkstra(graph &g, int start, int *prev, float *dist) {
         while(edge) {
             int v = get_adjnode(edge);
 
-            if(dist[v-1] > dist[u] + get_adjweight(edge)) {
-                dist[v-1] = dist[u] + get_adjweight(edge);
-                prev[v-1] = u-1;
+            if(dist[v-1] > dist[u-1] + get_adjweight(edge)) {
+                dist[v-1] = dist[u-1] + get_adjweight(edge);
+                prev[v-1] = u;
                 q = Decrease_Priority(q, v, dist[v-1]);
             }
 
@@ -78,17 +78,17 @@ void dijkstra(graph &g, int start, int *prev, float *dist) {
 
 
 /*
- *  @param dst index of destination node (dst_id - 1)
+ *  @param dst index of destination node [1..dim]
  */
 void print_path(int dst, int *prev) {
-    if(prev[dst] == -1) {
-        cout << dst + 1;
+    if(prev[dst - 1] == -1) {
+        cout << dst;
         return;
     }
 
-    print_path(prev[dst], prev);
+    print_path(prev[dst - 1], prev);
 
-    cout << " -> " << prev[dst] + 1;
+    cout << " -> " << dst;
 }
 
 
@@ -144,11 +144,15 @@ int main(int argc, char *argv[]) {
 
     dijkstra(g, start, previous, distance);
 
-    for(int i=0; i<g.dim; i++) {
-        cout << i + 1 << " - ";
+    cout << "vettore dei padri: " << endl;
+    for(int i=0; i<g.dim; i++)
+        cout << previous[i] << " ";
+    cout << endl;
+
+    for(int i=1; i<=g.dim; i++) {
+        cout << i << " - ";
         print_path(i, previous);
-        cout << " with weight: " << distance[i] << endl;
-        //cout << previous[i] << endl;
+        cout << " with weight: " << distance[i-1] << endl;
     }
 
     delete[] previous;
