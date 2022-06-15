@@ -1,4 +1,4 @@
-OBJ=grafo.o liste.o tipo.o compito.o
+OBJ=grafo.o liste.o tipo.o compito.o coda-bfs.o
 CXXFLAGS=-Wall
 
 -include "dependencies"

@@ -3,6 +3,7 @@
 #include "tipo.h"
 #include "liste.h"
 #include "grafo.h"
+#include "coda-bfs.h"
 using namespace std;
 
 int carica(lista& pi) {
@@ -73,6 +74,44 @@ void stampa_mappa(graph g,lista pi) {
     }
 }
 
+void trip(graph g, int node, lista pi) {
+    tipo_inf start_poi = search_pi(pi, node);
+
+    bool *visited = new bool[g.dim];
+    codaBFS front = newQueue();
+    enqueue(front, node);
+
+    while(!isEmpty(front)) {
+        int curr = dequeue(front);
+        visited[curr-1] = true;
+
+        adj_list adjs = get_adjlist(g, curr);
+        while(adjs) {
+            int cadj = get_adjnode(adjs);
+            tipo_inf cadj_poi = search_pi(pi, cadj);
+
+            if(cadj_poi.tipo == start_poi.tipo && !visited[cadj-1]) {
+                enqueue(front, cadj);
+            }
+
+            adjs = get_nextadj(adjs);
+        }
+    }
+
+    cout << "Raggiungibili da ";
+    print(start_poi);
+    cout << ":" << endl;
+
+    for(int i=1; i<=g.dim; i++) {
+        if(i != node && visited[i-1]) {
+            print(search_pi(pi, i));
+            cout << endl;
+        }
+    }
+
+    delete[] visited;
+}
+
 int main() {
     lista pi = nullptr;
     int npoi = carica(pi);
@@ -80,21 +119,10 @@ int main() {
     graph g = mappa(npoi);
     stampa_mappa(g, pi);
 
-    int user_in = 0;
-    do {
-        cout << "Inserisci il numero del PoI da ricercare: ";
-        cin >> user_in;
+    int user_in;
+    
+    cout << "Inserisci il numero del PoI da cui far partire il trip: ";
+    cin >> user_in;
 
-        if(user_in <= 0)
-            cout << "Arrivederci" << endl;
-
-        else if(user_in <= npoi) {
-            tipo_inf risultato = search_pi(pi, user_in);
-            print(risultato);
-            cout << endl;
-        } else {
-            cout << "Numero del PoI non valido" << endl;
-        }
-
-    } while(user_in > 0);
+    trip(g, user_in, pi);
 }
