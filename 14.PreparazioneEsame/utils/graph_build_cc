@@ -1,0 +1,33 @@
+/*
+ * Legge dallo stream g il numero dei nodi (prima riga), genera il corrispondente
+ * grafo e lo popola aggiungendo gli archi specificati nelle righe successive del file.
+ * g_build deve creare un grafo orientato o meno in base al parametro booleano d
+ * e deve leggere i pesi dal file se w è TRUE
+ */
+graph g_build(ifstream &g, bool oriented, bool weighted) {
+    int numNodi;
+    g >> numNodi;
+
+    graph gr = new_graph(numNodi);
+
+    while(g) {
+        int s, d, w;
+
+        g >> s >> d;
+
+        if(g.fail())
+            break;
+
+        if(weighted)
+            g >> w;
+        else
+            w = 1;
+
+        if(oriented)
+            add_arc(gr, s, d, w);
+        else
+            add_edge(gr, s, d, w);
+    }
+
+    return gr;
+}
