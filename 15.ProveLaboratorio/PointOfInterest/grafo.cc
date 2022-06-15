@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#include "grafi.h"
+#include "grafo.h"
 
 graph new_graph(int n){
 	graph G;
