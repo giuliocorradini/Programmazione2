@@ -14,7 +14,7 @@ void copy(tipo_inf &dst, tipo_inf src) {
 }
 
 void print(tipo_inf x) {
-    cout << x.id << " " << x.nome << " ";
+    /*cout << x.id << " " << x.nome << " ";
     switch(x.tipo) {
         case 'p':
             cout << "piazza";
@@ -28,5 +28,6 @@ void print(tipo_inf x) {
         default:
             cout << "invalid_type";
             break;
-    }
+    }*/
+    cout << x.nome;
 }
