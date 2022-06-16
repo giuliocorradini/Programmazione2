@@ -112,6 +112,21 @@ void trip(graph g, int node, lista pi) {
     delete[] visited;
 }
 
+lista genera(lista pi, char tipo) {
+    lista pi_affini = nullptr;
+
+    while(pi) {
+        if(head(pi).tipo == tipo) {
+            elem *e = new_elem(head(pi));
+            pi_affini = insert_elem(pi_affini, e);
+        }
+
+        pi = tail(pi);
+    }
+
+    return pi_affini;
+}
+
 int main() {
     lista pi = nullptr;
     int npoi = carica(pi);
@@ -125,4 +140,22 @@ int main() {
     cin >> user_in;
 
     trip(g, user_in, pi);
+
+    char tipo;
+    cout << "Inserisci il tipo di PoI da ricercare: ";
+    cin >> tipo;
+
+    lista poi_affini = genera(pi, tipo);
+    bool primo = true;
+    while(poi_affini) {
+        if(!primo)
+            cout << ", ";
+        else
+            primo = false;
+
+        print(head(poi_affini));
+
+        poi_affini = tail(poi_affini);
+    }
+    cout << endl;
 }
