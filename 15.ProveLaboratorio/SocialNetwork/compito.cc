@@ -2,6 +2,7 @@
 #include <fstream>
 #include "grafi.h"
 #include "node.h"
+#include "coda.h"
 using namespace std;
 
 graph parser() {
@@ -103,6 +104,37 @@ int* totalLike(graph g, node *n) {
     return v;
 }
 
+void follow(graph g, node *n, int u) {
+    bool *visited = new bool[g.dim];
+    for(int i=0; i<g.dim; i++)
+        visited[i] = false;
+    visited[u-1] = true;
+    
+    coda front = newQueue();
+    front = enqueue(front, u);
+
+    cout << "L'utente " << n[u-1].cont << " segue:" << endl;
+
+    while(!isEmpty(front)) {
+        int f = dequeue(front);
+
+        adj_list neigh = get_adjlist(g, f);
+        while(neigh) {
+            int ne_id = get_adjnode(neigh);
+
+            if(n[ne_id - 1].tipo == 'U' && !visited[ne_id-1]) {
+                cout << n[ne_id-1].cont << endl;
+                front = enqueue(front, ne_id);
+            }
+            visited[ne_id-1] = true;
+
+            neigh = get_nextadj(neigh);
+        }
+    }
+
+    delete[] visited;
+}
+
 int main() {
     graph g = parser();
     node *nodi = parser_nodi(g.dim);
@@ -121,6 +153,8 @@ int main() {
     for(int i=1; i<=g.dim; i++)
         if(v[i-1] == max_likes)
             cout << nodi[i-1].cont << endl;
+
+    follow(g, nodi, 8);
 
     return 0;
 }
