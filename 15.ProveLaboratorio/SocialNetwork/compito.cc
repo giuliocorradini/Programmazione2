@@ -68,9 +68,59 @@ void stampa(graph g, node *nodi) {
     }
 }
 
+int find_owner(graph g, node *n, int tw) {
+    adj_list owner = get_adjlist(g, tw);
+    while(owner) {
+        if(n[get_adjnode(owner) - 1].tipo == 'U')
+            return get_adjnode(owner);
+        owner = get_nextadj(owner);
+    }
+
+    return -1;
+}
+
+int* totalLike(graph g, node *n) {
+    int *v = new int[g.dim];
+    for(int i=0; i<g.dim; i++)
+        v[i] = 0;
+
+
+    for(int i=1; i<=g.dim; i++)
+        if (n[i-1].tipo == 'U') {
+
+            adj_list likes = get_adjlist(g, i);
+            while(likes) {
+                if(n[get_adjnode(likes) - 1].tipo == 'T') {
+                    //Find owner
+                    int owner = find_owner(g, n, get_adjnode(likes));
+                    v[owner-1]++;
+                }
+                likes = get_nextadj(likes);
+            }
+
+        }
+
+    return v;
+}
+
 int main() {
     graph g = parser();
     node *nodi = parser_nodi(g.dim);
 
     stampa(g, nodi);
+    
+    int *v = totalLike(g, nodi);
+    
+    int max_likes;
+    // Trova max
+    for(int i=1; i<=g.dim; i++)
+        if(v[i-1] > max_likes)
+            max_likes = v[i-1];
+
+    // Stampa MIP(s)
+    for(int i=1; i<=g.dim; i++)
+        if(v[i-1] == max_likes)
+            cout << nodi[i-1].cont << endl;
+
+    return 0;
 }
