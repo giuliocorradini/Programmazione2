@@ -1,0 +1,2 @@
+lista.o: lista.h tipo.h
+tipo.o: tipo.h
