@@ -23,8 +23,7 @@ void print_key(tipo_key);
 bnode* bst_search(bst,tipo_key);
 void bst_delete(bst&, bnode*);
 
-
-
-
-
-
+/**
+ * 	Stampa i valori in ordine crescente.
+ */
+void print_values(bst);

@@ -144,3 +144,14 @@ void bst_delete(bst& b, bnode* n){
 	  delete n;
 
 }
+
+//DFS in-order
+void print_values(bst t) {
+	if(get_left(t))
+		print_values(get_left(t));
+
+	print(get_value(t));
+
+	if(get_right(t))
+		print_values(get_right(t));
+}

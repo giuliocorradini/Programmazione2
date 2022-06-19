@@ -31,5 +31,7 @@ int main() {
         bst_insert(carte, node);
     }
 
+    print_values(carte);
+
     return 0;
 }

@@ -13,5 +13,5 @@ void copy(tipo_inf &dst, tipo_inf src) {
 }
 
 void print(tipo_inf x) {
-    cout << x.nominativo << " - " << x.punti << " punti";
+    cout << x.nominativo << " - " << x.punti << " punti" << endl;
 }
