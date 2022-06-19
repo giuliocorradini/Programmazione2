@@ -4,7 +4,7 @@
 #include "lista.h"
 using namespace std;
 
-/*
+/**
  *  Aggiunge un evento in agenda. Se l'inizio dell'evento coincide con un evento già presente (come ora di inizio
  *  e data) viene stampato un messaggio di errore.
  *  L'inserimento è ordinato rispetto alla lista degli eventi.
@@ -58,7 +58,7 @@ void agenda(lista &ag, tipo_inf a) {
     }
 }
 
-/*
+/**
  *  Stampa su stdout tutti gli eventi in agenda. Gli eventi potrebbero non essere stampati ordinati.
  *  @param l - la lista degli eventi in agenda
  */
@@ -71,7 +71,7 @@ void stampa(lista l) {
     }
 }
 
-/*
+/**
  *  Carica la lista di eventi per l'agenda leggendo da file. Utilizza il file "agenda.txt"
  *  nella directory corrente
  *  @param ag - la lista che rappresenta gli eventi in agenda
@@ -92,7 +92,7 @@ void carica(lista &ag) {
     in.close();
 }
 
-/*
+/**
  *  Stampa il numero di appuntamenti che precedono e seguono nello stesso giorno.
  *  @param agenda - puntatore alla lista degli eventi in agenda
  *  @param a - l'evento di cui cercare i precedenti e i successivi
