@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cstring>
 #include "lista.h"
 using namespace std;
 
@@ -50,10 +51,44 @@ void carica(lista &ag) {
     in.close();
 }
 
+/*
+ *  Stampa il numero di appuntamenti che precedono e seguono nello stesso giorno.
+ *  @param agenda - puntatore alla lista degli eventi in agenda
+ *  @param a - l'evento di cui cercare i precedenti e i successivi
+ */
+void quanti(lista agenda, tipo_inf a) {
+    int prev=0, post=0;
+    
+    while(agenda) {
+        if(strcmp(head(agenda).data, a.data) == 0) {
+            int cmp = strcmp(a.ora_i, head(agenda).ora_i);
+            
+            if(cmp > 0)
+                post++;
+            else if (cmp < 0)
+                prev++;
+        }
+
+        agenda = tail(agenda);
+    }
+
+    cout << prev << (prev!=1 ? " appuntamenti" : " appuntamento");
+    cout << " prima e " << post << (post!=1 ? " appuntamenti" : " appuntamento") << " dopo" << endl;
+}
+
 int main() {
     lista ag = nullptr;
     carica(ag);
     stampa(ag);
+
+    tipo_inf palestra;
+    cout << "Inserisci i dati dell'appuntamento" << endl;
+    cout << "Data: ";
+    cin >> palestra.data;
+    cout << "Ora di inizio: ";
+    cin >> palestra.ora_i;
+
+    quanti(ag, palestra);
 
     return 0;
 }

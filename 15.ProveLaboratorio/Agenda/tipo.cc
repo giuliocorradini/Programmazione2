@@ -4,7 +4,7 @@
 using namespace std;
 
 int compare(tipo_inf a, tipo_inf b) {
-    bool cmp = strcmp(a.data, b.data);
+    int cmp = strcmp(a.data, b.data);
     if(cmp != 0)
         return cmp;
 
