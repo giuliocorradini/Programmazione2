@@ -5,6 +5,7 @@
 struct tipo_inf {
     char nominativo[41];
     int punti;
+    bool acquisto_oggi;
 };
 
 int compare(tipo_inf,tipo_inf);

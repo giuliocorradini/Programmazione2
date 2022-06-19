@@ -150,6 +150,7 @@ void print_values(bst t) {
 	if(get_left(t))
 		print_values(get_left(t));
 
+	cout << get_key(t) << " ";
 	print(get_value(t));
 
 	if(get_right(t))

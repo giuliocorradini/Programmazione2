@@ -31,10 +31,25 @@ void aggiorna(bst t, tipo_key k, int punti) {
     bnode *carta = bst_search(t, k);
     if(carta) {
         carta->inf.punti += punti;
+        carta->inf.acquisto_oggi = true;
         cout << "Punteggio cliente aggiornato" << endl;
     } else {
         cout << "Carta non trovata" << endl;
     }
+}
+
+
+void stampa_senza_acquisti(bst t) {
+    if(get_left(t))
+        stampa_senza_acquisti(get_left(t));
+
+    if(!get_value(t).acquisto_oggi) {
+        cout << get_key(t) << " ";
+        print(get_value(t));
+    }
+
+    if(get_right(t))
+        stampa_senza_acquisti(get_right(t));
 }
 
 
@@ -45,6 +60,7 @@ int main() {
     char trash;
     tipo_key codice;
     tipo_inf carta;
+    carta.acquisto_oggi=false;
 
     cout << "Numero carte: ";
     cin >> n;
@@ -83,6 +99,9 @@ int main() {
     aggiorna(carte, codice, punti);
 
     print_values(carte);
+
+    cout << "Chi non ha comprato oggi:" << endl;
+    stampa_senza_acquisti(carte);
 
     return 0;
 }
