@@ -7,13 +7,54 @@ using namespace std;
 /*
  *  Aggiunge un evento in agenda. Se l'inizio dell'evento coincide con un evento già presente (come ora di inizio
  *  e data) viene stampato un messaggio di errore.
+ *  L'inserimento è ordinato rispetto alla lista degli eventi.
+ *  @param ag - Reference alla lista di eventi
+ *  @param a - l'evento da inserire
  */
 void agenda(lista &ag, tipo_inf a) {
-    if(!search(ag, a)) {
+    lista agptr = ag;
+    lista last_elem = nullptr;
+
+    if(ag == nullptr) {
+
         elem *e = new_elem(a);
-        ag = insert_elem(ag, e);
+        ag = e;
+
     } else {
-        cout << "Non posso inserire " << a.descr << " perché c'è già un evento il " << a.data << " alle " << a.ora_i << endl;
+
+        int cmp = 1;
+
+        while(agptr && cmp > 0) {
+            cmp = compare(a, head(agptr));
+
+            if(cmp > 0) {
+                last_elem = agptr;
+                agptr = tail(agptr);
+            }
+        }
+
+
+        if(cmp == 0)
+            cout << "Non posso inserire " << a.descr << " perché c'è già un evento il " << a.data << " alle " << a.ora_i << endl;
+
+        elem *e = new_elem(a);
+
+        if(agptr == nullptr) { //&& cmp > 0 per forza, devo inserire in coda
+            last_elem->pun = e;
+            e->prev = last_elem;
+        }
+
+        else if(cmp < 0) { //inserimento prima del nodo agptr
+            e->pun = agptr;
+            e->prev = agptr->prev;
+            agptr->prev = e;
+            
+            if(agptr == ag) //se devo inserire in testa
+                ag = e;
+            else
+                e->prev->pun = e;
+        }
+
     }
 }
 
@@ -82,6 +123,7 @@ int main() {
     stampa(ag);
 
     tipo_inf palestra;
+    
     cout << "Inserisci i dati dell'appuntamento" << endl;
     cout << "Data: ";
     cin >> palestra.data;
