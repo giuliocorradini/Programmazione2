@@ -27,6 +27,17 @@ int totalePunti(bst t, tipo_key inf, tipo_key sup) {
 }
 
 
+void aggiorna(bst t, tipo_key k, int punti) {
+    bnode *carta = bst_search(t, k);
+    if(carta) {
+        carta->inf.punti += punti;
+        cout << "Punteggio cliente aggiornato" << endl;
+    } else {
+        cout << "Carta non trovata" << endl;
+    }
+}
+
+
 int main() {
     bst carte = nullptr;
 
@@ -62,6 +73,16 @@ int main() {
     cin >> sup;
 
     cout << "Totale dei punti: " << totalePunti(carte, inf, sup) << endl;
+
+    int punti;
+    cout << "Numero della carta: ";
+    cin >> codice;
+    cout << "Punti da inserire: ";
+    cin >> punti;
+
+    aggiorna(carte, codice, punti);
+
+    print_values(carte);
 
     return 0;
 }
